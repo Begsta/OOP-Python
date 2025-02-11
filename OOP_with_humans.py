@@ -30,6 +30,12 @@ class Aspirant:
         return (f"Студент под именем {self.name}\nучится в группе {self.group}\nна {"очке" if self.form else "заочке"}\nс оценками: { ", ".join(map(str, self.progress)) }\n"
             f"имеет статей {self.staty},\nимя руководителя {self.name_ruk}")
     
+class Ruk:
+    def __init__(self, name:str, ucState:bool, groups:list) -> any:
+        self.name = name; self.ucState = ucState; self.groups = groups
+
+    def __str__(self):
+        return f"Имя преподавателя {self.name}\nналичее учёной степения {"присутствует" if self.ucState else "остутствует"}\nгруппы которые он ведёт: {', '.join(map(str, self.groups))}"
 
 
 
