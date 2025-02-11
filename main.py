@@ -27,7 +27,34 @@ class RatNum:
         return  f"{self.num}/{self.den}"
     
     # Функция умножения элемента на число или на элемент класса
-
+    # Принимает параметры self - объект класса RatNum
+    #                     other - целое число или объект класса RatNum
     def __mul__(self, other) -> any:
         if isinstance(other, RatNum):
-            
+            return RatNum(self.num * other.num, self.den*other.den)
+        elif isinstance(other, int):
+            return RatNum(self.num * other, self.den)
+        raise TypeError
+    
+    # Функция деления элемента на число или на элемент класса
+    # Принимает параметры self - объект класса RatNum
+    #                     other - целое число или объект класса RatNum
+    def __truediv__(self, other) -> any:
+        if isinstance(other, RatNum):
+            return RatNum(self.num * other.den, self.den*other.num)
+        elif isinstance(other, int):
+            return RatNum(self.num, self.den* other)
+        raise TypeError
+    
+# Тесты:
+
+a = [RatNum.generate(1, 20, 1, 20) for _ in range(5)]
+
+for i in a:
+    b = RatNum.generate(1, 20, 1, 20)
+    cm, cd = i*b, i/b
+    print(f"{i} / {b} = {cm}")
+    print(f"{i} * {b} = {cd}")
+    cm, cd = i*2, i/2
+    print(f"{i} / {b} = {cm}")
+    print(f"{i} * {b} = {cd}")
