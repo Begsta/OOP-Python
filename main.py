@@ -30,3 +30,4 @@ class RatNum:
 
     def __mul__(self, other) -> any:
         if isinstance(other, RatNum):
+            
