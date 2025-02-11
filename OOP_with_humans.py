@@ -7,7 +7,29 @@ class Sholnik:
     def __str__(self) -> str:
         return f"Школьник под именем {self.name},\nучится в {self.klass} классе по буквой {self.buk}\nОценки:\n{ ", ".join(map(str, self.progress)) }"
 
+class Student:
+    def __init__(self, name:str, group:int, form:bool, progress:list) -> any:
+        self.name = name; self.group = group; self.form = form; self.progress = progress
 
+    def __str__(self) -> str:
+        return f"Студент под именем {self.name}\nучится в группе {self.group}\nна {"бакалавр" if self.form else "специалиет"}\nс оценками: { ", ".join(map(str, self.progress)) }"
+    
+
+class Mgister:
+    def __init__(self, name:str, group:int, form:bool, staty:int, progress:list) -> any:
+        self.name = name; self.group = group; self.form = form; self.progress = progress; self.staty = staty
+    def __str__(self)->str:
+        return (f"Студент под именем {self.name}\nучится в группе {self.group}\nна {"очке" if self.form else "заочке"}\nс оценками: { ", ".join(map(str, self.progress)) }\n"
+            f"имеет статей {self.staty}")
+
+
+class Aspirant:
+    def __init__(self, name:str, group:int, form:bool, staty:int, progress:list, name_ruk:str)->any:
+        self.name = name; self.group = group; self.form = form; self.progress = progress; self.staty = staty; self.name_ruk =name_ruk
+    def __str__(self):
+        return (f"Студент под именем {self.name}\nучится в группе {self.group}\nна {"очке" if self.form else "заочке"}\nс оценками: { ", ".join(map(str, self.progress)) }\n"
+            f"имеет статей {self.staty},\nимя руководителя {self.name_ruk}")
+    
 
 
 
