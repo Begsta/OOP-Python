@@ -1,4 +1,4 @@
-from math import gcd
+from math import gcd, sqrt
 from random import randint
 
 
@@ -7,7 +7,7 @@ class RatNum:
     # Принимает параметыр num(целое число) - числитель
     #                     den(целое число) - знаменатель
     def __init__(self, num:int, den : int) -> any:
-        if num != 0 and den != 0:
+        if num * den != 0:
             k = gcd(num, den) # Насходит общий делитель для числел
                               # Чтобы можно было записать число в виде дроби
             self.num = num // k
@@ -46,12 +46,63 @@ class RatNum:
             return RatNum(self.num, self.den* other)
         raise TypeError
     
+
+class IrNum:
+    def __init__(self, num : int, den : int, see : int):
+        if num * den != 0:
+            if num != 1:
+                self.num = sqrt(num)
+                self.den = den
+                self.switch = True # Для понимания числитель ирроцианальный
+                                   # Или знаменатель
+            elif den != 1:
+                self.num = num
+                self.den = sqrt(den)
+                self.switch = False
+        else:
+            raise ValueError
+        self.see = see
+    
+    # Функция генерации случайного элемена класса
+    # Принимает параметры min и max num(целые числа) - диапазон случайного числителя
+    #                     min и max den(целые числа) - диапазон случайного знаменателя
+    @staticmethod
+    def generate(min_num : int, max_num : int, min_den : int, max_den : int) -> any:    
+        return IrNum(randint(min_num, max_num), randint(min_den, max_den), randint(4, 6))
+    
+    # Функция вывода элмента класса
+    # Принимает лишь сам объект класса
+    def __str__(self) -> str:
+        if self.switch:
+            return  f"{round(self.num, self.see)}/{self.den}"
+        return f"{self.num}/{round(self.den, self.see)}"
+    
+    # Функция умножения элемента на число или на элемент класса
+    # Принимает параметры self - объект класса IrNum
+    #                     other - целое число или объект класса RatNum
+    def __mul__(self, other) -> any:
+        if isinstance(other, IrNum):
+            return IrNum(self.num * other.num, self.den*other.den, self.see)
+        elif isinstance(other, int):
+            return IrNum(self.num * other, self.den, self.see)
+        raise TypeError
+    
+    # Функция деления элемента на число или на элемент класса
+    # Принимает параметры self - объект класса IrNum
+    #                     other - целое число или объект класса RatNum
+    def __truediv__(self, other) -> any:
+        if isinstance(other, IrNum):
+            return IrNum(self.num * other.den, self.den*other.num, self.see)
+        elif isinstance(other, int):
+            return IrNum(self.num, self.den* other, self.see)
+        raise TypeError
+
 # Тесты:
 
-a = [RatNum.generate(1, 20, 1, 20) for _ in range(5)]
+a = [IrNum.generate(1, 20, 1, 20) for _ in range(5)]
 
 for i in a:
-    b = RatNum.generate(1, 20, 1, 20)
+    b = IrNum.generate(1, 20, 1, 20)
     cm, cd = i*b, i/b
     print(f"{i} / {b} = {cm}")
     print(f"{i} * {b} = {cd}")
