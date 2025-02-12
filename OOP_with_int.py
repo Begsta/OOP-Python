@@ -124,7 +124,7 @@ class DrobFib:
                        randint(min, max))
     
     def __str__(self) -> str:
-        return f"{self.num} / {self.den}"
+        return f"{self.num}/{self.den}"
     
     def __mul__(self, other) -> any:
         if isinstance(other, DrobFib):

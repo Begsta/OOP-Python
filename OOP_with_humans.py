@@ -15,56 +15,48 @@ class Student:
         return f"Студент под именем {self.name}\nучится в группе {self.group}\nна {"бакалавр" if self.form else "специалиет"}\nс оценками: { ", ".join(map(str, self.progress)) }"
     
 
-class Mgister:
+class Magister:
     def __init__(self, name:str, group:int, form:bool, staty:int, progress:list) -> any:
         self.name = name; self.group = group; self.form = form; self.progress = progress; self.staty = staty
     def __str__(self)->str:
-        return (f"Студент под именем {self.name}\nучится в группе {self.group}\nна {"очке" if self.form else "заочке"}\nс оценками: { ", ".join(map(str, self.progress)) }\n"
+        return (f"Магистр под именем {self.name}\nучится в группе {self.group}\nна {"очке" if self.form else "заочке"}\nс оценками: { ", ".join(map(str, self.progress)) }\n"
             f"имеет статей {self.staty}")
 
 
 class Aspirant:
     def __init__(self, name:str, group:int, form:bool, staty:int, progress:list, name_ruk:str)->any:
         self.name = name; self.group = group; self.form = form; self.progress = progress; self.staty = staty; self.name_ruk =name_ruk
-    def __str__(self):
-        return (f"Студент под именем {self.name}\nучится в группе {self.group}\nна {"очке" if self.form else "заочке"}\nс оценками: { ", ".join(map(str, self.progress)) }\n"
+    def __str__(self) -> str:
+        return (f"Аспирант под именем {self.name}\nучится в группе {self.group}\nна {"очке" if self.form else "заочке"}\nс оценками: { ", ".join(map(str, self.progress)) }\n"
             f"имеет статей {self.staty},\nимя руководителя {self.name_ruk}")
     
 class Ruk:
     def __init__(self, name:str, ucState:bool, groups:list) -> any:
         self.name = name; self.ucState = ucState; self.groups = groups
 
-    def __str__(self):
+    def __str__(self)->str:
         return f"Имя преподавателя {self.name}\nналичее учёной степения {"присутствует" if self.ucState else "остутствует"}\nгруппы которые он ведёт: {', '.join(map(str, self.groups))}"
 
 
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------
-size_t = 10
+size_t = 3
 
 arrayNames = ['Влад', "Настя", "Глеб", "Саня",  "Рома", "Егор" ]
-arrayKlass = [11, 8, 9, 2, 5, 6]
+arrayKlass = [95, 49, 86, 69, 79]
 arrayBuk = ["A", "B", "E", "C" ]
-arraySh = [Sholnik(arrayNames[randint(0, 5)], arrayKlass[randint(0, 5)], arrayBuk[randint(0, 3)], [randint(2, 5) for _ in range(5)]) for i in range(size_t)]
+arraySh = [Ruk(arrayNames[randint(0, 5)], randint(0, 1), [randint(23, 65) for _ in range(5)]) for i in range(size_t) ]
 #------------------------------------------------------------------------------------------------------------------------------------------------------
-print("Школьни:")
+print("Руководители:")
 for i in arraySh:
     print(i)
 
 arraySh = sorted(arraySh, key=lambda a: a.name)
 
 print("------------------------------------------------------------------------------------------------------------------------------------------------------")
-print("Школьни:")
+print("Руководители:")
 for i in arraySh:
     print(i)
 print("------------------------------------------------------------------------------------------------------------------------------------------------------")
-print("Плохие студенты")
-n=0
-for st in arraySh:
-    for j in st.progress:
-        if j < 3:
-            print(st)
-            n+=1
-            break
-if n ==0:
-    print("Таких нет")
+print("Плохие Руководителей не бывает")
+
